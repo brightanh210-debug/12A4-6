@@ -1,44 +1,113 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Quà tặng 20/10</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🎁 Nhân ngày 20/10 dành tặng các bạn nữ 12A4😘</title>
+<style>
+body{font-family:sans-serif;background:#fff0f6;margin:0;padding:0}
+.wrap{max-width:480px;margin:auto;padding:20px}
+header{text-align:center;margin-bottom:20px}
+input{padding:8px;margin:5px 0;width:100%;box-sizing:border-box;border-radius:5px;border:1px solid #ccc}
+button{padding:10px 15px;border:none;border-radius:5px;background:#ff69b4;color:#fff;cursor:pointer}
+button:hover{opacity:0.9}
+.suggestions{border:1px solid #ccc;border-radius:5px;margin-top:-5px;background:#fff;position:absolute;width:100%;z-index:100}
+.sug{padding:5px;cursor:pointer}
+.sug:hover{background:#ffe6f0}
+.profile.hidden{display:none}
+.profile-cover{padding:20px;color:#333;border-radius:10px}
+.profile-card{padding:15px;background:#fff;border-radius:10px;margin-top:10px}
+.poem-wrap pre{white-space:pre-wrap;font-family:inherit}
+.password-container{position:relative;display:flex;}
+.password-container input{flex:1}
+.password-container button{position:absolute;right:5px;top:5px;background:transparent;color:#333;font-size:16px}
+.icons{margin-top:10px;text-align:center;font-size:20px}
+</style>
 </head>
 <body>
-    <div class="background">
-        <div class="container">
-            <h1>Dành tặng 🎁 cho các bạn nữ 12A4 ngày 20/10</h1>
-            <p>Nhớ nhập họ và tên cùng với mật khẩu để đăng nhập nhé 😘</p>
-            
-            <form>
-                <label for="fullname">Họ và tên:</label>
-                <input list="names" id="fullname" name="fullname" placeholder="Nhập họ và tên" required>
-                <datalist id="names">
-                    <option value="Nguyễn Thị An">
-                    <option value="Trần Minh Anh">
-                    <option value="Lê Ngọc Châu">
-                    <option value="Phạm Thanh Dung">
-                    <option value="Vũ Bảo Hà">
-                </datalist>
+<div class="wrap">
+  <header>
+    <h1>🎁 Dành tặng cho các bạn nữ 12A4</h1>
+    <p class="lead">Nhập tên và mật khẩu để mở món quà nhé.</p>
+  </header>
 
-                <label for="password">Mật khẩu:</label>
-                <div class="password-container">
-                    <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
-                    <button type="button" id="togglePassword">👁️</button>
-                </div>
+  <main class="card">
+    
+    <form id="giftForm">
+      <input id="name" type="search" placeholder="Gõ tên (ví dụ: Dương Nhật Anh)" autocomplete="off" required>
+      
+      <label for="password">Mật khẩu:</label>
+      <div class="password-container">
+        <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+        <button type="button" id="togglePassword">👁️</button>
+      </div>
 
-                <button type="submit" class="btn-login">Đăng nhập</button>
-            </form>
+      <button type="submit" class="btn-login">Đăng nhập</button>
+      <div id="suggestions" class="suggestions"></div>
+    </form>
 
-            <div class="icons">
-                <span>🌸</span>
-                <span>💕</span>
-                <span>🌸</span>
-                <span>💖</span>
-            </div>
-        </div>
+    <div class="icons">
+      <span>🌸</span>
+      <span>💕</span>
+      <span>🌸</span>
+      <span>💖</span>
     </div>
+
+    
+    <section id="profile" class="profile hidden" aria-hidden="true">
+      <div class="profile-cover" id="profileCover">
+        <div class="profile-header">
+          <h2 id="pname"></h2>
+          <div class="meta">Lớp 12A4 — Trường THPT Lê Quý Đôn<br>Chủ nhiệm: Nguyễn Thanh Tâm</div>
+        </div>
+      </div>
+      <div class="profile-card" id="profileCard">
+        <div class="poem-wrap">
+          <h3>💌 Lời chúc</h3>
+          <div id="poem" class="poem"></div>
+        </div>
+        <div id="videoBox" class="videoBox"></div>
+        <button id="copyLink" class="mini">Copy link cá nhân</button>
+        <div class="note">Mật khẩu : <strong>Các bạn nam 12A4 đẹp trai</strong></div>
+        <a id="back" class="back">← Quay lại</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+const passwordInput = document.getElementById('password');
+document.getElementById('togglePassword').addEventListener('click', ()=>{
+  passwordInput.type = passwordInput.type==="password"?"text":"password";
+});
+
+
+    
+const form = document.getElementById('giftForm');
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+    
+  const name = document.getElementById('name').value.trim();
+  const pass = passwordInput.value.trim();
+  
+  if(!name){ alert("Nhập tên đi nhé."); return; }
+  if(pass!=="Các bạn nam 12A4 đẹp trai"){ alert("Sai mật khẩu chung."); return; }
+  
+  
+  document.getElementById('pname').textContent = name;
+  document.getElementById('poem').textContent = "💌 Đây là món quà dành cho " + name + "!";
+  document.getElementById('profileCover').style.background = "#FFD6E8";
+  document.getElementById('profile').classList.remove('hidden');
+  form.style.display = 'none';
+});
+
+
+    
+document.getElementById('back').addEventListener('click', ()=>{
+  document.getElementById('profile').classList.add('hidden');
+  form.style.display = '';
+});
+</script>
 </body>
 </html>
